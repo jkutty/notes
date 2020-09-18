@@ -1,0 +1,73 @@
+### gorira tmux
+gstat -f eli$
+top -j
+
+#### USEFUL COMMANDS TO COPY PASTE ####
+### DISK ###
+
+## find out what is taking up filesystem space
+
+# linux
+du -hxSa / | sort -hr | head -20
+# -h human-readable
+# -x don't cross mounts
+# -S don't display parent directories if sub-directories exist
+# -a consider files as well as directories
+# sort -hr
+# -h human-readable (consider SI suffix in file size, ie K,M,G,T)
+# -r reverse order
+
+# freebsd
+du -h -d 1 / | sort -hr
+
+# find files modified in the past day
+find . -type f -mtime -1
+
+
+## disk activity
+# freebsd
+gstat [-a] [-f fliter]
+
+
+## zfs
+
+zfs list -r -d 1 -o name,used,avail,used,usedsnap,compression,canmount,mountpoint,devices zroot
+
+zfs list -r -o name,used,avail,usedsnap,reservation,quota,canmount,mountpoint,mounted zroot
+
+zfs list -r -o name,used,quota,reservation,refer,refquota,refreservation,avail,usedsnap,canmount,mountpoint,mounted zroot
+
+zfs list -r -o name,used,quota,reservation,refer,refquota,refreservation,avail,usedsnap,canmount,mountpoint,mounted oculto
+
+zfs list -t snap -r oculto
+
+
+### MEMORY ###
+
+# sort processes by memory use
+# on centos 7
+top -o %MEM
+
+
+# check swap
+cat /proc/swaps
+
+
+### NETWORK ###
+
+# # freebsd
+netstat
+sockstat
+
+
+# # linux
+ss -tuan
+
+# show logs
+journalctl -u ntpd
+
+
+
+# Japanese language on cli
+pkg install font-jis-misc
+
